@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   fill_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/25 15:05:23 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/01/25 15:05:24 by jmlynarc         ###   ########.fr       */
+/*   Created: 2018/01/25 14:54:44 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/01/25 15:04:49 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_color		color_from(unsigned char r, unsigned char g, unsigned char b)
+void	fill_pixel(unsigned char *img_str, int line_size, t_point *point,
+		t_color color)
 {
-	t_color		color;
+	int		i;
 
-	color.r = r;
-	color.g = g;
-	color.b = b;
-	color.a = 0;
-	return (color);
-}
-
-int			get_endian_color(unsigned int r, unsigned int g, unsigned int b)
-{
-	int		endian_color;
-
-	endian_color = 0;
-	endian_color = ((r & 0xFF) << 16) + ((g & 0xFF) << 8) + (b & 0xFF);
-	return (endian_color);
+	i = (point->y * line_size + point->x) * 4;
+	img_str[i] = color.r;
+	img_str[i + 1] = color.g;
+	img_str[i + 2] = color.b;
+	img_str[i + 3] = color.a;
 }

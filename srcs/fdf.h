@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/25 15:05:33 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/01/25 15:55:54 by jmlynarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
@@ -11,11 +23,20 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <math.h>
 
 
 /*
 ** ======================== TYPEDEF
 */
+
+typedef struct	s_color
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
+}				t_color;
 
 typedef struct	s_map
 {
@@ -28,6 +49,12 @@ typedef struct	s_view
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	int		win_height;
+	int		win_length;
+	void	*img_ptr;
+	int		img_height;
+	int		img_length;
+	double	zoom;
 }				t_view;
 
 typedef struct	s_point
@@ -40,9 +67,8 @@ typedef struct	s_line
 {
 	t_point		start;
 	t_point		end;
-	int			color;
+	t_color		color;
 }				t_line;
-
 
 /*
 ** ======================== PROTOTYPES
@@ -51,5 +77,9 @@ typedef struct	s_line
 int		get_endian_color(unsigned int r, unsigned int g, unsigned int b);
 void	draw_line(t_point start, t_point end, t_view view);
 t_map			**read_map_from(char *file);
+void	fill_pixel(unsigned char *img_str, int line_size, t_point *point,
+		t_color color);
+t_point		calc_coordinates(t_view view, double prop_x, double prop_y);
+void	display_map(t_map **map, t_view view);
 
 #endif

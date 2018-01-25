@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_test.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/25 15:05:50 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/01/25 16:00:01 by jmlynarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-static void		display_map(t_map **map)
+static void		print_map(t_map **map)
 {
 	t_map		*current;
 	size_t		i;
@@ -19,9 +31,17 @@ static void		display_map(t_map **map)
 	}
 }
 
+int     deal_key(int key, void *param)
+{
+    if (key == 53)
+        exit(0);
+    return (0);
+}
+
 int main(int ac, char **av)
 {
 	t_map		**map;
+	t_view		view;
 
 	if (ac != 2)
 		return (0);
@@ -29,6 +49,18 @@ int main(int ac, char **av)
 	if (map == NULL)
 		ft_putendl("Returned t_map** is NULL");
 	else
-		display_map(map);
+		print_map(map);
+
+	view.zoom = 0.8;
+
+	view.mlx_ptr = mlx_init();
+    view.win_ptr = mlx_new_window(view.mlx_ptr, 1200, 800, "mlx 42");
+	view.win_length = 1200;
+	view.win_height = 800;
+	display_map(map, view);
+
+    mlx_key_hook(view.win_ptr, deal_key, (void *)&view);
+    mlx_loop(view.mlx_ptr);
+
 	return (0);
 }
