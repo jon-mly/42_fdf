@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 15:05:33 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/01/25 15:55:54 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/01/26 14:07:41 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,24 @@ typedef struct	s_map
 
 typedef struct	s_view
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	int		win_height;
-	int		win_length;
-	void	*img_ptr;
-	int		img_height;
-	int		img_length;
-	double	zoom;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	int				win_height;
+	int				win_length;
+	void			*img_ptr;
+	unsigned char	*img_str;
+	int				line_size;
+	int				img_height;
+	int				img_length;
+	double			zoom;
+	double			view_angle;
+	double			view_rotation;
+	double			step;
+	int				center_x;
+	int				center_y;
+	t_map			**map;
+	int				map_length;
+	int				map_height;
 }				t_view;
 
 typedef struct	s_point
@@ -77,9 +87,11 @@ typedef struct	s_line
 int		get_endian_color(unsigned int r, unsigned int g, unsigned int b);
 void	draw_line(t_point start, t_point end, t_view view);
 t_map			**read_map_from(char *file);
-void	fill_pixel(unsigned char *img_str, int line_size, t_point *point,
+void	fill_pixel(unsigned char *img_str, int line_size, t_point point,
 		t_color color);
 t_point		calc_coordinates(t_view view, double prop_x, double prop_y);
 void	display_map(t_map **map, t_view view);
+t_color		color_from(unsigned char r, unsigned char g, unsigned char b);
+int		count_map_height(t_map **map);
 
 #endif
