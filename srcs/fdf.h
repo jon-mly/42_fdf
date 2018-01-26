@@ -65,6 +65,7 @@ typedef struct	s_view
 	t_map			**map;
 	int				map_length;
 	int				map_height;
+	int				i;
 }				t_view;
 
 typedef struct	s_point
@@ -87,11 +88,11 @@ typedef struct	s_line
 int		get_endian_color(unsigned int r, unsigned int g, unsigned int b);
 void	draw_line(t_point start, t_point end, t_view view);
 t_map			**read_map_from(char *file);
-void	fill_pixel(unsigned char *img_str, int line_size, t_point point,
-		t_color color);
+void	fill_pixel(t_view view, t_point point, t_color color);
 t_point		calc_coordinates(t_view view, double prop_x, double prop_y);
-void	display_map(t_map **map, t_view view);
+void	display_map(t_map **map, t_view *view);
 t_color		color_from(unsigned char r, unsigned char g, unsigned char b);
 int		count_map_height(t_map **map);
+t_point		point_from(double i, double j, t_view view);
 
 #endif

@@ -33,42 +33,70 @@ static void		print_map(t_map **map)
 
 int     deal_key(int key, void *param)
 {
-	t_view		view;
+	t_view		*view;
 
-	view = *((t_view *)param);
+	view = (t_view *)param;
 	printf("key = %d\n", key);
+	view->i += 1;
+	printf("i = %d\n", view->i);
     if (key == 53)
         exit(0);
-	else if (key == 69)
+	else if (key == 12)
 	{
-		view.zoom += 0.1;
-		display_map(view.map, view);
+		view->zoom = view->zoom + 0.1;
+		display_map(view->map, view);
 	}
-	else if (key == 78)
+	else if (key == 14)
 	{
-		view.zoom -= 0.1;
-		display_map(view.map, view);
+		view->zoom = view->zoom - 0.1;
+		display_map(view->map, view);
+	}
+	else if (key == 13)
+	{
+		view->center_y -= sin(view->view_angle) * 0.1 * (double)(view->img_height);
+		display_map(view->map, view);
+	}
+	else if (key == 1)
+	{
+		view->center_y += sin(view->view_angle) * 0.1 * (double)(view->img_height);
+		display_map(view->map, view);
+	}
+	else if (key == 126)
+	{
+		view->view_angle += M_PI_4 / 3;
+		display_map(view->map, view);
+	}
+	else if (key == 125)
+	{
+		view->view_angle -= M_PI_4 / 3;
+		display_map(view->map, view);
 	}
     return (0);
 }
 
-t_view		init_environment(void)
+t_view		*init_environment(void)
 {
-	t_view		view;
+	t_view		*view;
 
-	view.mlx_ptr = NULL;
-	view.win_ptr = NULL;
-	view.img_ptr = NULL;
-	view.img_str = NULL;
-	view.map = NULL;
-	view.zoom = 0.8;
+	if (!(view = (t_view *)malloc(sizeof(t_view))))
+		return (NULL);
+	view->mlx_ptr = NULL;
+	view->win_ptr = NULL;
+	view->img_ptr = NULL;
+	view->img_str = NULL;
+	view->map = NULL;
+	view->zoom = 0.4;
+	view->view_angle = M_PI_2;
+
+	view->i = 0;
+
 	return (view);
 }
 
 int main(int ac, char **av)
 {
 	t_map		**map;
-	t_view		view;
+	t_view		*view;
 
 	view = init_environment();
 
@@ -80,20 +108,19 @@ int main(int ac, char **av)
 	else
 		print_map(map);
 
-	view.map = map;
-	view.map_length = (*map)->len;
-	view.map_height = count_map_height(map);
-	ft_putendl("#1");
-	view.mlx_ptr = mlx_init();
-    view.win_ptr = mlx_new_window(view.mlx_ptr, 1200, 800, "mlx 42");
-	view.win_length = 1200;
-	view.win_height = 800;
-	view.center_x = view.img_length / 2;
-	view.center_y = view.img_height / 2;
+	view->map = map;
+	view->map_length = (*map)->len;
+	view->map_height = count_map_height(map);
+	view->mlx_ptr = mlx_init();
+    view->win_ptr = mlx_new_window(view->mlx_ptr, 1200, 800, "mlx 42");
+	view->win_length = 1200;
+	view->win_height = 800;
+	view->center_x = view->win_length / 2;
+	view->center_y = view->win_height / 2;
 	display_map(map, view);
 
-    mlx_key_hook(view.win_ptr, deal_key, (void *)&view);
-    mlx_loop(view.mlx_ptr);
+    mlx_key_hook(view->win_ptr, deal_key, (void *)view);
+    mlx_loop(view->mlx_ptr);
 
 	return (0);
 }

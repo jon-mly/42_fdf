@@ -34,3 +34,12 @@ t_point		calc_coordinates(t_view view, double prop_x, double prop_y)
 //	printf("=> prop_x = %.3f, prop_y = %.3f, calc_x = %d, calc_y = %d\n", prop_x, prop_y, calc_x, calc_y);
 	return (point);
 }
+
+t_point		point_from(double i, double j, t_view view)
+{
+	t_point		a;
+
+	a.x = (int)((double)(view.center_x) + (i - ((double)(view.map_length) / 2)) * view.step);
+	a.y = (int)((double)(view.center_y) + (j - ((double)(view.map_height) / 2)) * view.step * sin(view.view_angle));
+	return (a);
+}

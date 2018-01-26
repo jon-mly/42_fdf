@@ -12,14 +12,18 @@
 
 #include "fdf.h"
 
-void	fill_pixel(unsigned char *img_str, int line_size, t_point point,
-		t_color color)
+void	fill_pixel(t_view view, t_point point, t_color color)
 {
 	int		i;
 
-	i = (point.y * line_size + point.x) * 4;
-	img_str[i] = color.r;
-	img_str[i + 1] = color.g;
-	img_str[i + 2] = color.b;
-	img_str[i + 3] = color.a;
+	if ((point.x < 0 || point.x >= view.img_length) ||
+		(point.y < 0 || point.y >= view.img_height))
+		return;
+	i = (point.y * view.line_size) * 4 + point.x * 4;
+//	ft_putstr("line size = "); ft_putnbr(view.line_size); ft_putchar('\n');
+//ft_putstr("x = "); ft_putnbr(point.x); ft_putstr(", y = "); ft_putnbr(point.y); ft_putstr(", i = "); ft_putnbr(i); ft_putchar('\n');
+	view.img_str[i] = color.r;
+	view.img_str[i + 1] = color.g;
+	view.img_str[i + 2] = color.b;
+	view.img_str[i + 3] = color.a;
 }
