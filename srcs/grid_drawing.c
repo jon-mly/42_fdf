@@ -44,8 +44,8 @@ void	horizontal_line_fill(t_map **map, t_view view)
 		x = -1;
 		while (++x < view.map_length - 1)
 		{
-			start = point_from((double)x, (double)y, view);
-			end = point_from((double)(x + 1), (double)y, view);
+			start = point_from((double)x, (double)y, (double)current->coord_list[x], view);
+			end = point_from((double)(x + 1), (double)y, (double)current->coord_list[x + 1], view);
 			draw_line(start, end, view);
 		}
 		y++;
@@ -70,8 +70,8 @@ void	vertical_line_fill(t_map **map, t_view view)
 		x = -1;
 		while (++x < view.map_length)
 		{
-			start = point_from((double)x, (double)y, view);
-			end = point_from((double)x, (double)(y + 1), view);
+			start = point_from((double)x, (double)y, (double)current->coord_list[x], view);
+			end = point_from((double)x, (double)(y + 1), current->next->coord_list[x], view);
 			//ft_putendl("Pass");
 			draw_line(start, end, view);
 			//ft_putendl("End");
@@ -98,14 +98,10 @@ void	display_map(t_map **map, t_view *view)
 	view->img_height = view->win_height;
 	view->img_ptr = ptr_img;
 	view->step = (double)(((view->zoom) * (view->img_length)) / ((*map)->len));
-printf("Step = %.3f\n", view->step);
 	img_str = mlx_get_data_addr(ptr_img, &bpp, &s_l, &endian);
 	view->img_str = (unsigned char *)img_str;
 	view->line_size = s_l / 4;
-	ft_putendl("#3.5");
 	horizontal_line_fill(map, *view);
-	ft_putendl("#4");
 	vertical_line_fill(map, *view);
-	ft_putendl("#5");
 	mlx_put_image_to_window((void *)view, view->win_ptr, ptr_img, 0, 0);
 }

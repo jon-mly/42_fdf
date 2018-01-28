@@ -65,7 +65,7 @@ typedef struct	s_view
 	t_map			**map;
 	int				map_length;
 	int				map_height;
-	int				i;
+	double				z_scale;
 }				t_view;
 
 typedef struct	s_point
@@ -93,6 +93,6 @@ t_point		calc_coordinates(t_view view, double prop_x, double prop_y);
 void	display_map(t_map **map, t_view *view);
 t_color		color_from(unsigned char r, unsigned char g, unsigned char b);
 int		count_map_height(t_map **map);
-t_point		point_from(double i, double j, t_view view);
+t_point		point_from(double i, double j, double z, t_view view);
 
 #endif

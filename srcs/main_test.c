@@ -37,8 +37,6 @@ int     deal_key(int key, void *param)
 
 	view = (t_view *)param;
 	printf("key = %d\n", key);
-	view->i += 1;
-	printf("i = %d\n", view->i);
     if (key == 53)
         exit(0);
 	else if (key == 12)
@@ -71,6 +69,36 @@ int     deal_key(int key, void *param)
 		view->view_angle -= M_PI_4 / 3;
 		display_map(view->map, view);
 	}
+	else if (key == 0)
+	{
+		view->center_x -= 0.1 * (double)(view->img_length);
+		display_map(view->map, view);
+	}
+	else if (key == 2)
+	{
+		view->center_x += 0.1 * (double)(view->img_length);
+		display_map(view->map, view);
+	}
+	else if (key == 123)
+	{
+		view->view_rotation -= M_PI_4 / 3;
+		display_map(view->map, view);
+	}
+	else if (key == 124)
+	{
+		view->view_rotation += M_PI_4 / 3;
+		display_map(view->map, view);
+	}
+	else if (key == 6)
+	{
+		view->z_scale *= 2;
+		display_map(view->map, view);
+	}
+	else if (key == 8)
+	{
+		view->z_scale /= 2;
+		display_map(view->map, view);
+	}
     return (0);
 }
 
@@ -87,7 +115,8 @@ t_view		*init_environment(void)
 	view->map = NULL;
 	view->zoom = 0.4;
 	view->view_angle = M_PI_2;
-
+	view->view_rotation = 0;
+	view->z_scale = 10;
 	view->i = 0;
 
 	return (view);

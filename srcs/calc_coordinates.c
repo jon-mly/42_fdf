@@ -35,11 +35,20 @@ t_point		calc_coordinates(t_view view, double prop_x, double prop_y)
 	return (point);
 }
 
-t_point		point_from(double i, double j, t_view view)
-{
-	t_point		a;
+/*
+** Will calculate the 2D-coordinates of a point (a node of the wireframe)
+** based on its 3D-coordinates, the view angle, rotation, zoom and center.
+*/
 
-	a.x = (int)((double)(view.center_x) + (i - ((double)(view.map_length) / 2)) * view.step);
-	a.y = (int)((double)(view.center_y) + (j - ((double)(view.map_height) / 2)) * view.step * sin(view.view_angle));
+t_point		point_from(double i, double j, double z, t_view view)
+{
+	double			x;
+	double			y;
+	t_point			a;
+
+	x = (double)(view.center_x) + (i - ((double)(view.map_length) / 2)) * view.step;
+	y = (double)(view.center_y) + (j - ((double)(view.map_height) / 2)) * view.step * sin(view.view_angle) - z * view.z_scale * cos(view.view_angle);
+	a.x = (int)(x * cos(view.view_rotation) - y * sin(view.view_rotation));
+	a.y = (int)(x * sin(view.view_rotation) + y * cos(view.view_rotation));
 	return (a);
 }
