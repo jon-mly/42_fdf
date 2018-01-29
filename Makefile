@@ -12,6 +12,9 @@ SRCS = $(SRCS_REP)colors.c \
 		$(SRCS_REP)calc_coordinates.c \
 		$(SRCS_REP)fill_pixel.c \
 		$(SRCS_REP)grid_drawing.c \
+		$(SRCS_REP)exit.c \
+		$(SRCS_REP)key_events.c \
+		$(SRCS_REP)main.c
 
 W_FLAGS = -Wall -Werror -Wextra
 
@@ -21,7 +24,7 @@ MLX_FLAGS = -I ~/Library -g -L ~/Library -lmlx -framework OpenGL -framework \
 MATH_FLAG = -lm
 
 test:
-	gcc $(MLX_FLAGS) $(MATH_FLAG) $(SRCS) $(SRCS_REP)main_test.c $(LIBFT) -o $(TEST)
+	gcc $(MLX_FLAGS) $(MATH_FLAG) $(SRCS) $(LIBFT) -o $(TEST)
 
 all: test
 

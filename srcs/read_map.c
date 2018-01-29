@@ -97,7 +97,6 @@ t_map			**read_map_from(char *file)
 			!(new_node = convert_coord_line(coord_line)))
 			return (NULL);
 		append_node(map, new_node);
-		//ft_strdel(coord_line);
 	}
 	ft_strdel(tmp);
 	close(fd);

@@ -20,8 +20,6 @@ void	fill_pixel(t_view view, t_point point, t_color color)
 		(point.y < 0 || point.y >= view.img_height))
 		return;
 	i = (point.y * view.line_size) * 4 + point.x * 4;
-//	ft_putstr("line size = "); ft_putnbr(view.line_size); ft_putchar('\n');
-//ft_putstr("x = "); ft_putnbr(point.x); ft_putstr(", y = "); ft_putnbr(point.y); ft_putstr(", i = "); ft_putnbr(i); ft_putchar('\n');
 	view.img_str[i] = color.r;
 	view.img_str[i + 1] = color.g;
 	view.img_str[i + 2] = color.b;

@@ -25,6 +25,12 @@
 # include <fcntl.h>
 # include <math.h>
 
+/*
+** ======================== MACROS
+*/
+
+# define WIN_LENGTH 1600
+# define WIN_HEIGHT 1200
 
 /*
 ** ======================== TYPEDEF
@@ -68,6 +74,13 @@ typedef struct	s_view
 	double				z_scale;
 }				t_view;
 
+typedef struct	s_vector
+{
+	double		x;
+	double		y;
+	double		z;
+}				t_vector;
+
 typedef struct	s_point
 {
 	int		x;
@@ -85,14 +98,17 @@ typedef struct	s_line
 ** ======================== PROTOTYPES
 */
 
-int		get_endian_color(unsigned int r, unsigned int g, unsigned int b);
-void	draw_line(t_point start, t_point end, t_view view);
+int				get_endian_color(unsigned int r, unsigned int g, unsigned int b);
+void			draw_line(t_point start, t_point end, t_view view);
 t_map			**read_map_from(char *file);
-void	fill_pixel(t_view view, t_point point, t_color color);
-t_point		calc_coordinates(t_view view, double prop_x, double prop_y);
-void	display_map(t_map **map, t_view *view);
-t_color		color_from(unsigned char r, unsigned char g, unsigned char b);
-int		count_map_height(t_map **map);
-t_point		point_from(double i, double j, double z, t_view view);
+void			fill_pixel(t_view view, t_point point, t_color color);
+t_point			calc_coordinates(t_view view, double prop_x, double prop_y);
+void			display_map(t_map **map, t_view *view);
+t_color			color_from(unsigned char r, unsigned char g, unsigned char b);
+int				count_map_height(t_map **map);
+t_point			point_from(double i, double j, double z, t_view view);
+void			exit_error(t_view *view);
+void			exit_normally(t_view *view);
+void			handle_key(int key, t_view *view);
 
 #endif

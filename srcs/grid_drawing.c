@@ -72,9 +72,7 @@ void	vertical_line_fill(t_map **map, t_view view)
 		{
 			start = point_from((double)x, (double)y, (double)current->coord_list[x], view);
 			end = point_from((double)x, (double)(y + 1), current->next->coord_list[x], view);
-			//ft_putendl("Pass");
 			draw_line(start, end, view);
-			//ft_putendl("End");
 		}
 		y++;
 		current = current->next;
@@ -89,7 +87,6 @@ void	display_map(t_map **map, t_view *view)
 	int		s_l;
 	int		endian;
 
-	ft_putendl("#2");
 	if (view->img_ptr)
 		mlx_destroy_image(view->mlx_ptr, view->img_ptr);
 	if (!(ptr_img = mlx_new_image(view->mlx_ptr, view->win_length, view->win_height)))
