@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 15:05:46 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/01/25 15:05:47 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/02/02 11:03:03 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	map = read_map_from(av[1]);
-	if (map == NULL)
+	if (map == NULL || *map == NULL)
 		exit_error(view);
 	view->map = map;
 	view->map_length = (*map)->len;

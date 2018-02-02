@@ -1,9 +1,22 @@
-NAME = fdf
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/02/02 11:04:36 by jmlynarc          #+#    #+#              #
+#    Updated: 2018/02/02 11:11:14 by jmlynarc         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-TEST = test_fdf
+NAME = fdf
+ASSOCIATED_REP = $(NAME).dSYM
 
 LIBFT_REP = libft/
 LIBFT = libft/libft.a
+
+INCLUDE_FLAG = -I includes/
 
 SRCS_REP = srcs/
 SRCS = $(SRCS_REP)colors.c \
@@ -16,6 +29,8 @@ SRCS = $(SRCS_REP)colors.c \
 		$(SRCS_REP)key_events.c \
 		$(SRCS_REP)main.c
 
+O_SRCS = $(SRCS:.c=.o)
+
 W_FLAGS = -Wall -Werror -Wextra
 
 MLX_FLAGS = -I ~/Library -g -L ~/Library -lmlx -framework OpenGL -framework \
@@ -23,17 +38,18 @@ MLX_FLAGS = -I ~/Library -g -L ~/Library -lmlx -framework OpenGL -framework \
 
 MATH_FLAG = -lm
 
-test:
-	gcc $(MLX_FLAGS) $(MATH_FLAG) $(SRCS) $(LIBFT) -o $(TEST)
+$(NAME):
+	cd $(LIBFT_REP) && make
+	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRCS) $(LIBFT) -o $(NAME)
 
-all: test
+all: $(NAME)
 
 clean:
 	cd $(LIBFT_REP) && make clean
-	rm -rf $(SRCS)
+	rm -rf $(O_SRCS)
 
 fclean: clean
 	cd $(LIBFT_REP) && make fclean
-	rm -rf $(TEST)
+	rm -rf $(NAME) $(ASSOCIATED_REP)
 
 re: fclean all
