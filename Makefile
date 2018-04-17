@@ -6,7 +6,7 @@
 #    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/02 11:04:36 by jmlynarc          #+#    #+#              #
-#    Updated: 2018/02/02 11:11:14 by jmlynarc         ###   ########.fr        #
+#    Updated: 2018/04/17 15:50:30 by jmlynarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,18 +38,21 @@ MLX_FLAGS = -I ~/Library -g -L ~/Library -lmlx -framework OpenGL -framework \
 
 MATH_FLAG = -lm
 
+%.o: %.c
+	@gcc $(W_FLAGS) -c $< -o $@
+
 $(NAME):
-	cd $(LIBFT_REP) && make
+	make -C $(LIBFT_REP)
 	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRCS) $(LIBFT) -o $(NAME)
 
 all: $(NAME)
 
 clean:
-	cd $(LIBFT_REP) && make clean
+	make clean -C $(LIBFT_REP)
 	rm -rf $(O_SRCS)
 
 fclean: clean
-	cd $(LIBFT_REP) && make fclean
+	make fclean -C $(LIBFT_REP)
 	rm -rf $(NAME) $(ASSOCIATED_REP)
 
 re: fclean all

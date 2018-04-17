@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 15:12:19 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/01/26 14:39:14 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 15:30:31 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,22 @@ void	horizontal_line_fill(t_map **map, t_view view)
 
 	current = *map;
 	y = 0;
-	if (!(current))
-		return;
-	while (current)
+	if (current != NULL)
 	{
-		x = -1;
-		while (++x < view.map_length - 1)
+		while (current)
 		{
-			start = point_from((double)x, (double)y, (double)current->coord_list[x], view);
-			end = point_from((double)(x + 1), (double)y, (double)current->coord_list[x + 1], view);
-			draw_line(start, end, view);
+			x = -1;
+			while (++x < view.map_length - 1)
+			{
+				start = point_from((double)x, (double)y,
+						(double)current->coord_list[x], view);
+				end = point_from((double)(x + 1), (double)y,
+						(double)current->coord_list[x + 1], view);
+				draw_line(start, end, view);
+			}
+			y++;
+			current = current->next;
 		}
-		y++;
-		current = current->next;
 	}
 }
 
@@ -63,23 +66,26 @@ void	vertical_line_fill(t_map **map, t_view view)
 
 	current = *map;
 	y = 0;
-	if (!(current))
-		return;
-	while (current->next)
+	if (current != NULL)
 	{
-		x = -1;
-		while (++x < view.map_length)
+		while (current->next)
 		{
-			start = point_from((double)x, (double)y, (double)current->coord_list[x], view);
-			end = point_from((double)x, (double)(y + 1), current->next->coord_list[x], view);
-			draw_line(start, end, view);
+			x = -1;
+			while (++x < view.map_length)
+			{
+				start = point_from((double)x, (double)y,
+						(double)current->coord_list[x], view);
+				end = point_from((double)x, (double)(y + 1),
+						current->next->coord_list[x], view);
+				draw_line(start, end, view);
+			}
+			y++;
+			current = current->next;
 		}
-		y++;
-		current = current->next;
 	}
 }
 
-void	display_map(t_map **map, t_view *view)
+int		display_map(t_map **map, t_view *view)
 {
 	void	*ptr_img;
 	char	*img_str;
@@ -89,8 +95,9 @@ void	display_map(t_map **map, t_view *view)
 
 	if (view->img_ptr)
 		mlx_destroy_image(view->mlx_ptr, view->img_ptr);
-	if (!(ptr_img = mlx_new_image(view->mlx_ptr, view->win_length, view->win_height)))
-		return;
+	if (!(ptr_img = mlx_new_image(view->mlx_ptr, view->win_length,
+					view->win_height)))
+		return (0);
 	view->img_length = view->win_length;
 	view->img_height = view->win_height;
 	view->img_ptr = ptr_img;
@@ -101,4 +108,5 @@ void	display_map(t_map **map, t_view *view)
 	horizontal_line_fill(map, *view);
 	vertical_line_fill(map, *view);
 	mlx_put_image_to_window((void *)view, view->win_ptr, ptr_img, 0, 0);
+	return (0);
 }

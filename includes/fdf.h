@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 15:05:33 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/01/26 14:07:41 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:07:46 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct	s_view
 	t_map			**map;
 	int				map_length;
 	int				map_height;
-	double				z_scale;
+	double			z_scale;
 }				t_view;
 
 typedef struct	s_vector
@@ -98,12 +98,13 @@ typedef struct	s_line
 ** ======================== PROTOTYPES
 */
 
-int				get_endian_color(unsigned int r, unsigned int g, unsigned int b);
+int				get_endian_color(unsigned int r, unsigned int g,
+		unsigned int b);
 void			draw_line(t_point start, t_point end, t_view view);
 t_map			**read_map_from(char *file);
 void			fill_pixel(t_view view, t_point point, t_color color);
 t_point			calc_coordinates(t_view view, double prop_x, double prop_y);
-void			display_map(t_map **map, t_view *view);
+int				display_map(t_map **map, t_view *view);
 t_color			color_from(unsigned char r, unsigned char g, unsigned char b);
 int				count_map_height(t_map **map);
 t_point			point_from(double i, double j, double z, t_view view);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/17 15:22:47 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/04/17 15:58:20 by jmlynarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static void		clear_map(t_map **map)
@@ -5,15 +17,16 @@ static void		clear_map(t_map **map)
 	t_map	*current;
 	t_map	*next;
 
-	if (map == NULL)
-		return;
-	next = *map;
-	while (next)
+	if (map != NULL)
 	{
-		current = next;
-		next = current->next;
-		ft_memdel((void**)(&(current->coord_list)));
-		ft_memdel((void**)&current);
+		next = *map;
+		while (next)
+		{
+			current = next;
+			next = current->next;
+			ft_memdel((void**)(&(current->coord_list)));
+			ft_memdel((void**)&current);
+		}
 	}
 }
 

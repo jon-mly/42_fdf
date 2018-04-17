@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/17 15:55:47 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/04/17 16:10:45 by jmlynarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-t_buffer	*get_buffer(int fd, t_buffer **node)
+t_buffer		*get_buffer(int fd, t_buffer **node)
 {
 	t_buffer	*current;
 
@@ -26,10 +38,10 @@ t_buffer	*get_buffer(int fd, t_buffer **node)
 	return (current);
 }
 
-int		extend_line(t_buffer *buffer, char **line)
+int				extend_line(t_buffer *buffer, char **line)
 {
-	char 		*tmp;
-	int 		index;
+	char		*tmp;
+	int			index;
 
 	if (ft_strchr(buffer->str, '\n'))
 		index = (int)(ft_strchr(buffer->str, '\n') - buffer->str);
@@ -48,7 +60,7 @@ int		extend_line(t_buffer *buffer, char **line)
 	return (0);
 }
 
-int 	find_carriage_return(t_buffer *buffer, char **line)
+int				find_carriage_return(t_buffer *buffer, char **line)
 {
 	if (ft_strchr(buffer->str, '\n'))
 	{
@@ -59,7 +71,7 @@ int 	find_carriage_return(t_buffer *buffer, char **line)
 	return (0);
 }
 
-int		get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	int				res;
 	static t_buffer	*list = NULL;

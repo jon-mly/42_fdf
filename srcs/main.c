@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 15:05:46 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/02/02 11:03:03 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 15:25:07 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_view		*init_environment(void)
 	return (view);
 }
 
-int		deal_key(int key, void *param)
+int			deal_key(int key, void *param)
 {
 	t_view		*view;
 
@@ -63,7 +63,7 @@ int		deal_key(int key, void *param)
 	return (0);
 }
 
-int main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_map		**map;
 	t_view		*view;
