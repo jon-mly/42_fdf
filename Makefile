@@ -6,7 +6,7 @@
 #    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/02 11:04:36 by jmlynarc          #+#    #+#              #
-#    Updated: 2018/04/17 15:50:30 by jmlynarc         ###   ########.fr        #
+#    Updated: 2018/05/23 11:23:29 by jmlynarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,17 +19,19 @@ LIBFT = libft/libft.a
 INCLUDE_FLAG = -I includes/
 
 SRCS_REP = srcs/
-SRCS = $(SRCS_REP)colors.c \
-		$(SRCS_REP)line_drawing.c \
-		$(SRCS_REP)read_map.c \
-		$(SRCS_REP)calc_coordinates.c \
-		$(SRCS_REP)fill_pixel.c \
-		$(SRCS_REP)grid_drawing.c \
-		$(SRCS_REP)exit.c \
-		$(SRCS_REP)key_events.c \
-		$(SRCS_REP)main.c
+SRCS = colors.c \
+		line_drawing.c \
+		read_map.c \
+		calc_coordinates.c \
+		fill_pixel.c \
+		grid_drawing.c \
+		exit.c \
+		key_events.c \
+		main.c
 
-O_SRCS = $(SRCS:.c=.o)
+SRC = $(addprefix $(SRCS_REP), $(SRCS))
+
+O_SRCS = $(SRC:.c=.o)
 
 W_FLAGS = -Wall -Werror -Wextra
 
@@ -38,12 +40,13 @@ MLX_FLAGS = -I ~/Library -g -L ~/Library -lmlx -framework OpenGL -framework \
 
 MATH_FLAG = -lm
 
-%.o: %.c
-	@gcc $(W_FLAGS) -c $< -o $@
-
-$(NAME):
+$(NAME): $(O_SRCS)
 	make -C $(LIBFT_REP)
-	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRCS) $(LIBFT) -o $(NAME)
+	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRC) $(LIBFT) -o $(NAME)
+
+%.o: %.c
+	@gcc $(W_FLAGS) $(INCLUDE_FLAG) -c $< -o $@
+
 
 all: $(NAME)
 

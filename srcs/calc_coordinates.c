@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 15:29:15 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 15:13:39 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/23 11:25:31 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static t_vector		apply_z_rotation(t_vector vector, t_view view)
 
 t_point				point_from(double i, double j, double z, t_view view)
 {
-	double			x;
-	double			y;
 	t_point			a;
 	t_vector		vector;
 
