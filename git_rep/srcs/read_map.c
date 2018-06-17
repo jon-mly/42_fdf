@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 15:05:54 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/01/25 15:05:55 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/17 16:44:21 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static t_map	*convert_coord_line(char **coord_line)
 	size_t		i;
 	size_t		count;
 
+	if (!coord_line)
+		return (NULL);
 	count = line_count(coord_line);
 	i = -1;
 	if (!(line = (t_map*)malloc(sizeof(t_map))))
@@ -54,10 +56,12 @@ static t_map	*convert_coord_line(char **coord_line)
 		if (!(is_integer_convertible(coord_line[i])))
 			return (NULL);
 		z_coord_list[i] = ft_atoi(coord_line[i]);
+		ft_memdel((void**)&coord_line[i]);
 	}
 	line->coord_list = z_coord_list;
 	line->len = count;
 	line->next = NULL;
+	ft_memdel((void**)&coord_line);
 	return (line);
 }
 
@@ -80,7 +84,6 @@ t_map			**read_map_from(char *file)
 {
 	int		fd;
 	char	**tmp;
-	char	**coord_line;
 	t_map	**map;
 	t_map	*new_node;
 
@@ -91,14 +94,15 @@ t_map			**read_map_from(char *file)
 	if (!(map = (t_map**)malloc(sizeof(t_map*))))
 		return (NULL);
 	*map = NULL;
-	while ((get_next_line(fd, tmp)))
+	while ((get_next_line(fd, tmp)) > 0)
 	{
-		if (!(coord_line = ft_strsplit(*tmp, ' ')) ||
-			!(new_node = convert_coord_line(coord_line)))
+		if (!(new_node = convert_coord_line(ft_strsplit(*tmp, ' '))))
 			return (NULL);
 		append_node(map, new_node);
+		ft_memdel((void**)tmp);
 	}
 	ft_strdel(tmp);
+	ft_memdel((void**)&tmp);
 	close(fd);
 	return (map);
 }

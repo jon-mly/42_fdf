@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 14:16:31 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 11:02:06 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/17 15:03:52 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			extend_line(t_buffer *buffer, char **line)
 	buffer->str[index] = '\0';
 	tmp = *line;
 	*line = ft_strjoin(tmp, buffer->str);
-	free(tmp);
+	ft_memdel((void**)&tmp);
 	if (index < BUFF_SIZE)
 	{
 		ft_memmove(buffer->str, buffer->str + index + 1, BUFF_SIZE - index);

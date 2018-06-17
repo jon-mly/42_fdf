@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 15:05:46 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 15:25:07 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/17 16:01:55 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int			main(int ac, char **av)
 	t_map		**map;
 	t_view		*view;
 
-	view = init_environment();
 	if (ac != 2)
-		return (0);
+		exit_usage();
+	view = init_environment();
 	map = read_map_from(av[1]);
 	if (map == NULL || *map == NULL)
 		exit_error(view);

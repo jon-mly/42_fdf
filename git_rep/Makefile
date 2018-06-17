@@ -6,7 +6,7 @@
 #    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/02 11:04:36 by jmlynarc          #+#    #+#              #
-#    Updated: 2018/05/23 11:23:29 by jmlynarc         ###   ########.fr        #
+#    Updated: 2018/06/17 15:45:58 by jmlynarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,8 @@ MLX_FLAGS = -I ~/Library -g -L ~/Library -lmlx -framework OpenGL -framework \
 			AppKit
 
 MATH_FLAG = -lm
+
+DEBUG_FLAG = -g -fsanitize=address -fno-omit-frame-pointer
 
 $(NAME): $(O_SRCS)
 	make -C $(LIBFT_REP)

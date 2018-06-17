@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 11:01:03 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 16:11:46 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/17 12:53:48 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # define BUFF_SIZE 1
 
+# define EOL '\n'
 # define EOF (-1)
 
 typedef struct	s_buffer

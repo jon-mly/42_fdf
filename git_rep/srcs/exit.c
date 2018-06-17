@@ -6,13 +6,13 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:22:47 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 15:58:20 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/17 15:50:02 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void		clear_map(t_map **map)
+void			clear_map(t_map **map)
 {
 	t_map	*current;
 	t_map	*next;
@@ -39,6 +39,12 @@ void			exit_error(t_view *view)
 		mlx_destroy_window(view->mlx_ptr, view->win_ptr);
 	clear_map(view->map);
 	ft_memdel((void**)(&view));
+	exit(0);
+}
+
+void			exit_usage(void)
+{
+	ft_putendl("Usage : ./fdf [file to read]");
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 15:05:33 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 16:07:46 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/17 15:50:14 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ int				count_map_height(t_map **map);
 t_point			point_from(double i, double j, double z, t_view view);
 void			exit_error(t_view *view);
 void			exit_normally(t_view *view);
+void			exit_usage(void);
+void			clear_map(t_map **map);
 void			handle_key(int key, t_view *view);
 
 #endif
